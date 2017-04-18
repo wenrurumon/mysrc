@@ -46,8 +46,3 @@ cca <- function(A,B){
   return(c("chisq_p"=chisq_p,"df"=p*q));
 }
 ccap <- function(A,B){as.numeric(cca(A,B)[1])}
-ccaps <- sapply(A,function(x){
-  sapply(B,function(y){
-    ccap(x,y)
-  })
-})

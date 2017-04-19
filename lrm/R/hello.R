@@ -1,7 +1,7 @@
 library(GenABEL)
-scale_ivn <- function(x){apply(x,2,rntransform)}
 qpca <- function(A,rank=0){
-  A <- scale_ivn(A)
+  A <- A[,apply(A,2,var)>0,drop=F]
+  A <- scale(A)[,]
   A.svd <- svd(A)
   if(rank==0){
     d <- A.svd$d
@@ -22,7 +22,7 @@ qpca <- function(A,rank=0){
 }
 
 qpca2 <- function(A,ifscale=T,l1=0.9,l2=0.9){
-  A.pca <- qpca(A,ifscale=ifscale)
-  A.qpca <- qpca(A,rank=which(A.pca$prop>=l1)[1],ifscale=ifscale)
+  A.pca <- qpca(A)
+  A.qpca <- qpca(A,rank=which(A.pca$prop>=l1)[1])
   A.qpca$X[,1:which(A.qpca$prop>=l2)[1],drop=F]
 }

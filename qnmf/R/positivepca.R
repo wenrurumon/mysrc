@@ -64,7 +64,7 @@ nmf2 <- function(A,K=3,lambda=100,a=0.9,maxitn=1000){
   #Loops
     i <- 0
     while(TRUE){
-      print(i <- i+1)
+      #print(i <- i+1)
       if(i>=maxitn){break}
       Iy <- (Y<0)
       Y2 <- positive(ginv(t(X)%*% X) %*% t(X) %*% A - lambda * Iy)

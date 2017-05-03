@@ -1,5 +1,6 @@
 
 rm(list=ls())
+library(corpcor)
 
 ####################################################
 # Macro
@@ -70,7 +71,10 @@ qnmf <- function(A,K=3,lambda=100,a=0.9,maxitn=1000){
     i <- 0
     while(TRUE){
       #print(i <- i+1)
-      if(i>=maxitn){break}
+      if(i>=maxitn){
+        print('Exceeds the maximum number of iterations')
+        break
+      }
       Iy <- (Y<0)
       Y2 <- positive(ginv(t(X)%*% X) %*% t(X) %*% A - lambda * Iy)
       X2 <- positive(A %*% t(Y2) %*% ginv(Y2 %*% t(Y2)))

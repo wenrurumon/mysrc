@@ -21,7 +21,12 @@ ginv<-function(A){
   }
   return(A_inv)
 }
-positive <- function(x){
+positive <- function(x,turn=F){
+  if(turn){
+    for(i in 1:ncol(x)){
+      x[,i] <- x[,i] * sign(max(x[,i]))
+    }
+  }
   ifelse(x>0,x,0)
 }
 qpca <- function(A,scale=T,rank=0){
@@ -45,7 +50,7 @@ qpca <- function(A,scale=T,rank=0){
   return(rlt)
 }
 
-qnmf <- function(A,K=3,lambda=100,a=0.9,maxitn=1000){
+nmf2 <- function(A,K=3,lambda=100,a=0.9,maxitn=1000){
   #adjustment?
   K <- K+1
   #initialization
@@ -64,7 +69,7 @@ qnmf <- function(A,K=3,lambda=100,a=0.9,maxitn=1000){
   #Loops
     i <- 0
     while(TRUE){
-      #print(i <- i+1)
+      print(i <- i+1)
       if(i>=maxitn){break}
       Iy <- (Y<0)
       Y2 <- positive(ginv(t(X)%*% X) %*% t(X) %*% A - lambda * Iy)

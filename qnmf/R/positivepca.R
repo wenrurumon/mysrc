@@ -45,7 +45,7 @@ qpca <- function(A,scale=T,rank=0){
   return(rlt)
 }
 
-qnmf <- function(A,K=3,lambda=100,a=0.9,maxitn=1000){
+nmf2 <- function(A,K=3,lambda=100,a=0.9,maxitn=1000){
   #adjustment?
   K <- K+1
   #initialization
@@ -81,5 +81,5 @@ qnmf <- function(A,K=3,lambda=100,a=0.9,maxitn=1000){
     X2 <- positive(A %*% t(Y2) %*% ginv(Y2 %*% t(Y2)))
     
   #output
-  return(list(A=X2%*%Y2,X=X2,Y=Y2,itn=i))
+  return(list(A=X2%*%Y2,X=X2[,],Y=Y2,itn=i))
 }

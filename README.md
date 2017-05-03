@@ -5,7 +5,7 @@ devtools::install_github("wenrurumon/mysrc/lrm",force=T)<br />
 devtools::install_github("wenrurumon/mysrc/qnmf",force=T)<br />
 
 
-'''bash
+```bash
 library(qnmf)
 library(NMF)
 library(corpcor)
@@ -31,4 +31,4 @@ rmat.nmf <- nmf(rmat,3)
 rmat.nmf <- basis(rmat.nmf) %*% coef(rmat.nmf)
 rmat.qnmf <- qnmf(rmat,3)$A
 mean((rmat-rmat.nmf)^2);mean((rmat-rmat.qnmf)^2)
-'''
+```

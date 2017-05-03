@@ -51,7 +51,7 @@ qpca <- function(A,scale=T,rank=0){
   return(rlt)
 }
 
-qnmf <- function(A,K=3,lambda=100,a=0.9,maxitn=1000){
+qnmf <- function(A,K=3,lambda=100,a=0.9,maxitn=10000){
   #adjustment?
   K <- K+1
   #initialization
@@ -70,7 +70,7 @@ qnmf <- function(A,K=3,lambda=100,a=0.9,maxitn=1000){
   #Loops
     i <- 0
     while(TRUE){
-      #print(i <- i+1)
+      i <- i+1
       if(i>=maxitn){
         print('Exceeds the maximum number of iterations')
         break

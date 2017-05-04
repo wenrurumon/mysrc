@@ -1,6 +1,5 @@
 
 rm(list=ls())
-library(corpcor)
 
 ####################################################
 # Macro
@@ -13,6 +12,11 @@ diag2 <- function(x){
     return(diag(x))
   }
 }
+scale2 <- function(x){
+  apply(x,2,function(xi){
+    (xi-min(xi))/max(xi-min(xi))
+  })
+}
 ginv<-function(A){
   A_svd<-fast.svd(A)
   if(length(A_svd$d)==1){
@@ -22,13 +26,8 @@ ginv<-function(A){
   }
   return(A_inv)
 }
-positive <- function(x,turn=F){
-  if(turn){
-    for(i in 1:ncol(x)){
-      x[,i] <- x[,i] * sign(max(x[,i]))
-    }
-  }
-  ifelse(x>0,x,0)
+positive <- function(x){
+  x * (x>0)
 }
 qpca <- function(A,scale=T,rank=0){
   if(scale){A <- scale(A)}
@@ -51,36 +50,42 @@ qpca <- function(A,scale=T,rank=0){
   return(rlt)
 }
 
-qnmf <- function(A,K=3,lambda=100,a=0.9,maxitn=10000){
-  #adjustment?
-  K <- K+1
-  #initialization
-    A.svd <- svd(qpca(A,F,K+1)$Z)
-    # A.svd <- svd(scale(A))
-    U <- A.svd$u[,1:K,drop=F]
-    V <- A.svd$v[,1:K,drop=F]
-    D <- diag2(A.svd$d[1:K])
-  
-    X <- U %*% sqrt(D)
-    for(i in 1:ncol(X)){
-      X[,i] <- X[,i] * sign(max(X[,i]))
-    }
-    Y <- sqrt(D) %*% t(V)
-
+nmf2 <- function(A,K=3,lambda=0.5,a=0.9,maxitn=1000){
+    #setup for test
+    # A <- rmatrix(10,5)
+    # K <- 3
+    # lambda <- 0.3
+    # a <- 0.5
+    # maxitn <- 1000
+    #adjustment?
+    K <- K
+    #initialization
+      A.svd <- svd(qpca(A,F,K+1)$Z)
+      # A.svd <- svd(scale(A))
+      U <- A.svd$u[,1:K,drop=F]
+      V <- A.svd$v[,1:K,drop=F]
+      D <- diag2(A.svd$d[1:K])
+      for(i in 1:K){
+        if(max(U[,i]) < 0){
+          U[,i] <- -U[,i]
+          V[,i] <- -V[,i]
+        }
+      }
+      X <- U %*% sqrt(D)
+      Y <- sqrt(D) %*% t(V)
   #Loops
     i <- 0
+    X <- positive(X)
+    # X <- scale2(X); Y <- scale2(Y)
     while(TRUE){
       i <- i+1
-      if(i>=maxitn){
-        print('Exceeds the maximum number of iterations')
-        break
-      }
-      Iy <- (Y<0)
-      Y2 <- positive(ginv(t(X)%*% X) %*% t(X) %*% A - lambda * Iy)
+      if(i>=maxitn){break}
+      Y2 <- positive(ginv(t(X)%*% X) %*% t(X) %*% A - lambda*max(Y))
       X2 <- positive(A %*% t(Y2) %*% ginv(Y2 %*% t(Y2)))
+      # X2 <- scale2(X2); Y2 <- scale2(Y2)
       Xf <- matrixcalc::frobenius.norm(X2-X)
       Yf <- matrixcalc::frobenius.norm(Y2-Y)
-      X <- X2; Y <- Y2  
+      X <- X2; Y <- Y2
       lambda <- lambda * a
       if(Xf<=1e-8 & Yf<=1e-8){break}
     }
@@ -88,7 +93,9 @@ qnmf <- function(A,K=3,lambda=100,a=0.9,maxitn=10000){
     X <-X[,apply(X,2,var)>0]
     Y2 <- positive(ginv(t(X)%*% X) %*% t(X) %*% A)
     X2 <- positive(A %*% t(Y2) %*% ginv(Y2 %*% t(Y2)))
-    
+
   #output
-  return(list(A=X2%*%Y2,X=X2[,],Y=Y2,itn=i))
+  rlt <- (list(A=X2%*%Y2,X=X2[,],Y=Y2,itn=i))
+  rlt
+  # diag(cor(A,rlt$A))
 }

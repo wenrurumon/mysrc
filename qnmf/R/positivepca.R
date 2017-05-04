@@ -50,7 +50,7 @@ qpca <- function(A,scale=T,rank=0){
   return(rlt)
 }
 
-nmf2 <- function(A,K=3,lambda=0.5,a=0.9,maxitn=1000){
+qnmf <- function(A,K=3,lambda=0.5,a=0.9,maxitn=1000){
     #setup for test
     # A <- rmatrix(10,5)
     # K <- 3

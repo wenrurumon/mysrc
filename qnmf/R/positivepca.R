@@ -50,30 +50,32 @@ qpca <- function(A,scale=T,rank=0){
   return(rlt)
 }
 
-qnmf <- function(A,K=3,lambda=0.5,a=0.9,maxitn=1000){
-    #setup for test
-    # A <- rmatrix(10,5)
-    # K <- 3
-    # lambda <- 0.3
-    # a <- 0.5
-    # maxitn <- 1000
-    #adjustment?
-    K <- K
+qnmf <- function(A,K=3,lambda=0.5,a=0.9,maxitn=1000,X=NULL){
+  if(!is.null(X)){
+    Y <- positive(ginv(t(X)%*% X) %*% t(X) %*% A)
+    i <- 0
+    while(TRUE){
+      if(i>=maxitn){break}
+      i <- i+1
+      Y2 <- positive(ginv(t(X)%*% X) %*% t(X) %*% A - lambda*max(Y))
+    }
+    X2 <- X
+  } else {
     #initialization
-      A.svd <- svd(qpca(A,F,K+1)$Z)
-      # A.svd <- svd(scale(A))
-      U <- A.svd$u[,1:K,drop=F]
-      V <- A.svd$v[,1:K,drop=F]
-      D <- diag2(A.svd$d[1:K])
-      for(i in 1:K){
-        if(max(U[,i]) < 0){
-          U[,i] <- -U[,i]
-          V[,i] <- -V[,i]
-        }
+    A.svd <- svd(qpca(A,F,K+1)$Z)
+    # A.svd <- svd(scale(A))
+    U <- A.svd$u[,1:K,drop=F]
+    V <- A.svd$v[,1:K,drop=F]
+    D <- diag2(A.svd$d[1:K])
+    for(i in 1:K){
+      if(max(U[,i]) < 0){
+        U[,i] <- -U[,i]
+        V[,i] <- -V[,i]
       }
-      X <- U %*% sqrt(D)
-      Y <- sqrt(D) %*% t(V)
-  #Loops
+    }
+    X <- U %*% sqrt(D)
+    Y <- sqrt(D) %*% t(V)
+    #Loops
     i <- 0
     X <- positive(X)
     # X <- scale2(X); Y <- scale2(Y)
@@ -89,13 +91,15 @@ qnmf <- function(A,K=3,lambda=0.5,a=0.9,maxitn=1000){
       lambda <- lambda * a
       if(Xf<=1e-8 & Yf<=1e-8){break}
     }
-  #Finalize
+    #Finalize
     X <-X[,apply(X,2,var)>0]
     Y2 <- positive(ginv(t(X)%*% X) %*% t(X) %*% A)
     X2 <- positive(A %*% t(Y2) %*% ginv(Y2 %*% t(Y2)))
+  }
 
   #output
   rlt <- (list(A=X2%*%Y2,X=X2[,],Y=Y2,itn=i))
   rlt
   # diag(cor(A,rlt$A))
 }
+

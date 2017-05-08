@@ -71,7 +71,7 @@ qnmf <- function(A,K=3,lambda=0.1,a=0.5,maxitn=1000,X=NULL,deconv=FALSE){
     rlt=qnmf_wx(A,X,lambda,a,maxitn)
   }
   if(deconv){
-    rlt$Y <- apply(rlt$Y,2,function(x) x/sum(x)})
+    rlt$Y <- apply(rlt$Y,2,function(x) {x/sum(x)})
     rlt$A <- rlt$X %*% rlt$Y
   }
   return(rlt)

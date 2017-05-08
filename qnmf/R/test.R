@@ -14,11 +14,11 @@ rmat <- function(nrow,ncol,k,sparse=0.3,error=1,fordeconv=FALSE){
   if(fordeconv){
     y <- apply(y,2,function(x){x/sum(x)})
   }
-  a <- x %*% y
+  raw <- a <- x %*% y
   error <- rnorm(length(a),mean=0,sd=sd(as.vector(a))) * error
   a <- a + error
   a <- a * (a>0)
-  list(A=a,X=x,Y=y)
+  list(A=a,X=x,Y=y,raw=raw)
 }
 
 fita <- function(A,a){

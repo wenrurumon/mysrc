@@ -1,5 +1,0 @@
-library(e1071)
-library(parallel)
-library(preprocessCore)
-library(NMF)
-library(corpcor)

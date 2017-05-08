@@ -60,14 +60,19 @@ qnmf_wox <- function(A,K,lambda,a,maxitn){
   rlt
 }
 
-qnmf <- function(A,K=3,lambda=0.1,a=0.5,maxitn=1000,X=NULL){
+qnmf <- function(A,K=3,lambda=0.1,a=0.5,maxitn=1000,X=NULL,deconv=FALSE){
   if(is.null(K)&is.null(X)){
     print("either X or K has to be in the model")
     break()
   }
   if(is.null(X)){
-    qnmf_wox(A,K,lambda,a,maxitn)
+    rlt=qnmf_wox(A,K,lambda,a,maxitn)
   } else {
-    qnmf_wx(A,X,lambda,a,maxitn)
+    rlt=qnmf_wx(A,X,lambda,a,maxitn)
   }
+  if(deconv){
+    rlt$Y <- apply(rlt$Y,2,function(x) x/sum(x)})
+    rlt$A <- rlt$X %*% rlt$Y
+  }
+  return(rlt)
 }

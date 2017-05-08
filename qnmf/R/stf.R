@@ -72,6 +72,8 @@ stf.deconv <- function(x,y,QN=TRUE){
   rsquare <- sapply(1:ncol(Y),function(i){summary(lm(rawY[,i]~eY[,i]-1))$r.square})
   names(rsquare) <- colnames(Y)
   return(
-    list(coef = rbind(eP),fit=eY,rsquare=rsquare)
+    list(A=eY,
+         X= rawX,
+         Y=rbind(ep))
   )
 }

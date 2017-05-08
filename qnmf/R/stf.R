@@ -74,6 +74,6 @@ stf.deconv <- function(y,x,QN=TRUE){
   return(
     list(A=eY,
          X= rawX,
-         Y=rbind(ep))
+         Y=rbind(eP))
   )
 }

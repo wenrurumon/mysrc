@@ -11,7 +11,7 @@ rmat <- function(nrow,ncol,k,sparse=0.3,error=1){
   list(A=a,X=x,Y=y)
 }
 
-error <- function(A,a){
+fit <- function(A,a){
   e <- (A-a)
   sum(e^2)/sum(A^2)
 }

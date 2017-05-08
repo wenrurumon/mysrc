@@ -59,3 +59,11 @@ qnmf_wox <- function(A,K,lambda,a,maxitn){
   rlt <- (list(A=X2%*%Y2,X=X2[,],Y=Y2,itn=i))
   rlt
 }
+
+qnmf <- function(A,K=3,lambda=0.1,a=0.5,maxitn=1000,X=NULL){
+  if(is.null(X)){
+    qnmf_wox(A,K,lambda,a,maxitn)
+  } else {
+    qnmf_wx(A,K,lambda,a,maxitn,X)
+  }
+}

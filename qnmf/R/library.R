@@ -1,0 +1,6 @@
+library(e1071)
+library(parallel)
+library(preprocessCore)
+library(qnmf)
+library(NMF)
+library(corpcor)

@@ -10,3 +10,8 @@ rmat <- function(nrow,ncol,k,sparse=0.3,error=1){
   a <- a * (a>0)
   list(A=a,X=x,Y=y)
 }
+
+test <- function(A,a){
+  e <- (A-a)
+  sum(e^2)/sum(A^2)
+}

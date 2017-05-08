@@ -61,7 +61,7 @@ qnmf_wox <- function(A,K,lambda,a,maxitn){
 }
 
 qnmf <- function(A,K=3,lambda=0.1,a=0.5,maxitn=1000,X=NULL){
-  if(is.null(K)&is.null(X)){"either X or K has to be in the model")
+  if(is.null(K)&is.null(X)){"either X or K has to be in the model")}
   if(is.null(X)){
     qnmf_wox(A,K,lambda,a,maxitn)
   } else {

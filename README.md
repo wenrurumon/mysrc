@@ -6,27 +6,18 @@ devtools::install_github("wenrurumon/mysrc/qnmf",force=T)<br />
 
 
 ```bash
+library(e1071)
+library(parallel)
+library(preprocessCore)
 library(qnmf)
 library(NMF)
 library(corpcor)
-testi <- function(){
-  rmatx <- matrix(runif(150,10,20),50,3)
-  rmaty <- matrix(runif(60,5,10),3,20)
-  rmaty[sample(rmaty,length(rmaty)/3)] <- 0
-  rmat_raw <- rmat <- rmatx %*% rmaty
-  error <- matrix(rnorm(length(rmat),mean=0,sd=sd(as.vector(rmat))),ncol=ncol(rmat),nrow=nrow(rmat))
-  rmat <- rmat + error
-  rmat <- rmat * (rmat>0)
-  rmat.nmf <- nmf(rmat,3)
-  rmat.nmf <- basis(rmat.nmf) %*% coef(rmat.nmf)
-  rmat.qnmf <- qnmf(rmat,3,0.4,0.5)$A
-  m1 <- mean((rmat_raw-rmat.nmf)^2)
-  m2 <- mean((rmat_raw-rmat.qnmf)^2)
-  c(m1,m2)
-}
-rmaxs <- sapply(1:1000,function(i){
-  try(testi())
-})
-summary(t(rmaxs))
-t.test(rmaxs[1,],rmaxs[2,])
+
+r <- rmat(100,20,5,.5,.3,T)
+rlt.qnmf <- qnmf(r$A,5)
+rlt.nmf <- nmf2(r$A,5)
+rlt.qnmfx <- qnmf(r$A,X=r$X,deconv=T)
+rlt.stf <- stf.deconv(r$A,x=r$X)
+sapply(list(rlt.qnmf$A,rlt.nmf$A,rlt.qnmfx$A,rlt.stf$A),fita,A=r$A)
+cbind(om=diag(cor(t(r$Y),t(rlt.qnmfx$Y))),stf=diag(cor(t(r$Y),t(rlt.stf$Y))))
 ```

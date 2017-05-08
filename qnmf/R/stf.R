@@ -53,7 +53,7 @@ CoreAlg <- function(X, y){
 # Deconvolution
 #########################################
 
-stf.deconv <- function(x,y,QN=TRUE){
+stf.deconv <- function(y,x,QN=TRUE){
   #y is the matrix of sample and result, x is the matrix of x and action
   #Input Setup
   rawX <- X <- data.matrix(x)

@@ -29,3 +29,13 @@ simu <- lapply(1:1000,function(i){
 ```
 
 devtools::install_github("wenrurumon/mysrc/jointnet",force=T)<br />
+
+'''bash
+rm(list=ls())
+library(jointnet)
+library(corpcor)
+library(abind)
+raw <- jn_example()
+jointnet(raw)
+'''
+

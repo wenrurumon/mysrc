@@ -27,3 +27,5 @@ simu <- lapply(1:1000,function(i){
   test(100,20,5,.5,1)
 })
 ```
+
+devtools::install_github("wenrurumon/mysrc/jointnet",force=T)<br />

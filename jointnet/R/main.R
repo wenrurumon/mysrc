@@ -18,9 +18,11 @@ equali <- function(Y,X,i,lambda1=0.5,rho=1,wsel=NULL,Z=0,U=0){
   x <- X
   w <- cbind(Y[,-i],x)
   if(is.null(wsel)){
-    wsel <- selbycor(yi,w,ncol(x)*lambda1)  
+    # wsel <- selbycor(yi,w,ncol(x)*lambda1)  
+    wsel <- lasso(yi,w,lambda=.1)[[1]]
   }
   wi <- w[,wsel,drop=F]
+  if(ncol(x)==0){x <- cbind(x,dummy=1)}
   di <- calc_d(wi,x,yi,rho,Z,U)
   wsel[wsel] <- di
   wsel

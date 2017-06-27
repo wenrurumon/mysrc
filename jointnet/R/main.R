@@ -30,6 +30,7 @@ equali <- function(Y,X,i,lambda1=0.5,rho=1,wsel=NULL,Z=0,U=0){
 
 #sparse coef given Y,X, i cross L
 maini <- function(raw,i=1,rho=1,lambda1=.7,lambda2=.1,a=.3,itnmax=100){
+  print(i)
   #config_in
   L <- length(raw)
   M <- ncol(raw[[1]]$Y)

@@ -11,7 +11,7 @@ lasso <- function(Y,X=NULL,lambda=0.3){
     X <- Y[,-1]
     Y <- Y[,1,drop=F]
   }
-  slimi <- flare::slim(X=X,Y=Y,lambda=lambda,rho=1,method='lasso',verbose=FALSE)
+  slimi <- flare::slim(X=scale(X),Y=scale(Y),lambda=lambda,rho=1,verbose=FALSE)
   Xsel <- (slimi$beta!=0)
   X <- X[,Xsel,drop=F]
   list(Xsel=Xsel,lm=lm(Y~X-1))

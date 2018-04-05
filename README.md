@@ -1,6 +1,29 @@
 # mysrc
 
 devtools::install_github("wenrurumon/mysrc/qfcca",force=T)<br />
+
+```bash
+rm(list=ls())
+library(qfcca)
+library(GenABEL)
+library(flare)
+library(fda)
+library(corpcor)
+
+A <- iris[,1:4]
+B <- cbind(as.numeric(iris[,5]))
+cca(A,B)
+
+A.qpca <- qpca(iris[,1:4],rank=which(qpca(A)$prop>=0.8)[1])$X
+cca(A.qpca,B)
+
+A.fpca <- fpca(A,1:4,7,0)
+A.fpca <- lapply(A.fpca,function(x){
+  x$score[,which(x$prop>=0.8)[1],drop=F]
+})
+sapply(A.fpca,cca,B=B)
+```
+
 devtools::install_github("wenrurumon/mysrc/cca",force=T)<br />
 devtools::install_github("wenrurumon/mysrc/lrm",force=T)<br />
 devtools::install_github("wenrurumon/mysrc/qnmf",force=T)<br />

@@ -1,5 +1,6 @@
 # mysrc
 
+devtools::install_github("wenrurumon/mysrc/xmndata",force=T)<br />
 devtools::install_github("wenrurumon/mysrc/qfcca",force=T)<br />
 
 ```bash

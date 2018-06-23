@@ -188,5 +188,5 @@ EdS_entropy<-function(x){
 
 fits <- function(x,y,p=1){
   x <- try(unlist(permANM(x,y,p))[c(1,4:5)])
-  if(is.numeric(x)){x}else{c(1,0)}
+  if(is.numeric(x)){x}else{c(0,1,0)}
 }

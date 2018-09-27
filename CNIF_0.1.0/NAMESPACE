@@ -1,0 +1,12 @@
+exportPattern("^[[:alpha:]]+")
+
+import(Rcpp)
+import(RcppArmadillo)
+import(igraph)
+import(hash)
+import(Rsymphony)
+import(rstackdeque)
+import(fda)
+import(MASS)
+import(flare)
+import(corpcor)

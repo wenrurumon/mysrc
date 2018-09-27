@@ -6,6 +6,7 @@
 #include <mat.h>
 
 using namespace Rcpp;
+using namespace arma;
 
 // shrinkage
 mat shrinkage(const mat& a, double kappa);

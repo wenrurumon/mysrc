@@ -9,7 +9,7 @@
 #include "serialize.h"
 #include <functional>
 #include <iostream>
-#include "matrix.h"
+#include "matrix/matrix.h"
 #include <limits>
 #include <array>
 

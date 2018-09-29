@@ -1,7 +1,7 @@
 // [[Rcpp::plugins(cpp11)]]
 // [[Rcpp::depends(RcppArmadillo)]]
 #include "vector.h"
-#include <std::map >
+#include <map>
 #include <list>
 #include <deque>
 #include <RcppArmadillo.h>

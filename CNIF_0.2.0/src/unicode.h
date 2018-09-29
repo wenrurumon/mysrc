@@ -3,8 +3,8 @@
 #ifndef DLIB_UNICODe_H_
 #define DLIB_UNICODe_H_
 
-#include "../uintn.h"
-#include "../algs.h"
+#include "uintn.h"
+#include "algs.h"
 #include "unicode_abstract.h"
 #include <string>
 #include <cstring>

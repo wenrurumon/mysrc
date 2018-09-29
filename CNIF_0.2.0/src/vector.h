@@ -5,11 +5,11 @@
 
 #include <cmath>
 #include "vector_abstract.h"
-#include "../algs.h"
-#include "../serialize.h"
+#include "algs.h"
+#include "serialize.h"
 #include <functional>
 #include <iostream>
-#include "../matrix/matrix.h"
+#include "matrix.h"
 #include <limits>
 #include <array>
 

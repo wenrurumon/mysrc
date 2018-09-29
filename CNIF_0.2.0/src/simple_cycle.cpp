@@ -37,8 +37,8 @@ void displayVV( vector< vector<int> > vss){
 
 
 // [[Rcpp::export]]
-std::map <int, vector<int> > get_cycles(const arma::mat & adjMat ){
-  std::map <int, vector<int> > rlt;
+map <int, vector<int> > get_cycles(const arma::mat & adjMat ){
+  map <int, vector<int> > rlt;
 
   vector< vector<int> > adjList;
   for( unsigned int i = 0; i < adjMat.n_rows; i++)

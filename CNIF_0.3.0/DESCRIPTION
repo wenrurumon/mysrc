@@ -1,0 +1,14 @@
+Package: CNIF2
+Type: Package
+Title: What the package does (short line)
+Version: 1.0
+Date: 2018-09-30
+Author: Who wrote it
+Maintainer: Who to complain to <yourfault@somewhere.net>
+Description: More about what it does (maybe more than one line)
+License: What license is it under?
+LinkingTo: Rcpp, RcppArmadillo
+Depends: Rcpp (>= 0.12.18), igraph, hash, Rsymphony, rstackdeque, fda,
+        MASS, flare, corpcor
+NeedsCompilation: yes
+Packaged: 2018-09-30 10:29:35 UTC; c509

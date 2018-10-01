@@ -12,8 +12,8 @@ Author:
         Momiao Xiong<momiao.xiong@uth.tmc.edu.cn>
 Maintainer: 
         Zixin Hu <huzixin@fudan.edu.cn>
-Description: T
-        his package allows users build a causal network/directed graphical network with the mothodology of structure equation and integer programming
+Description: 
+        This package allows users build a causal network/directed graphical network with the mothodology of structure equation and integer programming
 License: 
         GPL-3
 Encoding:

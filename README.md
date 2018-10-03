@@ -1,5 +1,8 @@
 # mysrc
 
+
+devtools::install_github("wenrurumon/mysrc/CNIF_0.3.0",force=T)<br />
+devtools::install_github("wenrurumon/mysrc/ctest",force=T)<br />
 devtools::install_github("wenrurumon/mysrc/fpca3d",force=T)<br />
 devtools::install_github("wenrurumon/mysrc/xmndata",force=T)<br />
 devtools::install_github("wenrurumon/mysrc/qfcca",force=T)<br />

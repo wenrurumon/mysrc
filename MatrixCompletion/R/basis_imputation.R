@@ -1,4 +1,3 @@
-
 imspline <- function(x,y,pos=max(x),thred=0.1,ifplot=F,ifscale=T){
 #INPUTE data with spline basis
   pos <- ceiling(pos)
@@ -38,8 +37,6 @@ imfourier <- function(x,y,pos=max(x),ifplot=F){
   }
   f
 }
-
-
 myinv<-function(A){
 #MYINV
   A_svd<-fast.svd(A)
@@ -50,5 +47,3 @@ myinv<-function(A){
   }
   return(A_inv)
 }
-
-

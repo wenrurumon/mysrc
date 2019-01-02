@@ -1,5 +1,3 @@
-#Processing data from base, idx and exe to JM
-
 jm <- function(pidi){
   # print(k<<-k+1)
   trate <- imrate(pidi)
@@ -20,4 +18,3 @@ jm <- function(pidi){
                     i.idx,i.exe,trate=trate)
   rlt
 }
-

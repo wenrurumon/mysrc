@@ -1,0 +1,28 @@
+Package: cetest
+Type: Package
+Title: Test for Causal Effect
+Version: 0.1.0
+Author: Sizhe, Zixin, Menghan
+Maintainer: huzixin@fudan.edu.cn
+Description:   
+  rm /Users/wenrurumon/Documents/fun/rpackage/ce.test.v1/R/*
+  cp /Documents/posdoc/sizhe/test/followup.R /Users/wenrurumon/Documents/fun/rpackage/ce.test.v1/R/
+  cp /Documents/posdoc/sizhe/test/init_dag.R /Users/wenrurumon/Documents/fun/rpackage/ce.test.v1/R/
+  cp /Documents/posdoc/sizhe/test/global.R /Users/wenrurumon/Documents/fun/rpackage/ce.test.v1/R/
+License: 
+Encoding: UTF-8
+LazyData: true
+Imports:
+  cubature,
+  causaleffect,
+  igraph,
+  bnlearn,
+  vcd,
+  MASS,
+  reshape,
+  stringr,
+  data.table,
+  dplyr,
+  trend,
+  effsize
+

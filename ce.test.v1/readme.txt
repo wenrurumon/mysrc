@@ -1,8 +1,9 @@
 
 rm(list=ls())
-devtools::install_github("wenrurumon/mysrc/ce.test.v1",force=T)
+# devtools::install_github("wenrurumon/mysrc/ce.test.v1",force=T)
 library(ce.test.v1)
 
+setwd("/Users/wenrurumon/Documents/posdoc/sizhe/test")
 data <- read.csv2("ukb_t2d_0702.csv",header=T,sep=',')
 data <- data[,!colnames(data)%in%c('Oestradiol','Rheumatoid_factor')]
 data <- sapply(na.omit(data),function(x){as.numeric(paste(x))})

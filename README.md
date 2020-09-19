@@ -68,3 +68,14 @@ raw <- jn_example()
 jointnet(raw)
 ```
 
+devtools::install_github("wenrurumon/mysrc/pcca",force=T)<br />
+
+```bash
+rm(list=ls())
+library(pcca)
+x1 <- lapply(1:10,function(x){matrix(rnorm(1000),100,10)}); names(x1) <- paste0('x',1:10)
+x2 <- lapply(1:10,function(x){matrix(rnorm(1000),100,10)}); names(x2) <- paste0('y',1:10)
+x.pcca <- pcca(x1,x2,prop=0.9)
+x.rlt <- fc2(x.pcca,thred=0.1)
+plotclust(x.rlt$network,x.rlt$cluster)
+```
